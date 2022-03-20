@@ -1,0 +1,63 @@
+﻿
+
+@model DemoKhaled.BL.Models.EmployeeVm
+@{
+    ViewData["Title"] = "detailes";
+}
+@*this line is indicator to the asp-for attribute which tell it i knew the Name from the data which is passed to me*/*@
+
+
+<h1>update</h1>
+<form class="form-group" asp-controller="Employee" asp-action="Update">
+
+    <label asp-for="Name">Name</label>
+    <input class="form-control" type="text" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <br/>s
+    <label asp-for="DepartmentId">Department Id</label>
+    <input class="form-control" type="text" asp-for="DepartmentId" />
+    <span asp-validation-for="DepartmentId"></span>
+
+    <br />
+    <label asp-for="salary">Salary</label>
+    <input class="form-control" type="text" asp-for="salary" />
+    <span asp-validation-for="salary"></span>
+
+    <br />
+    <label asp-for="Emial">Emial</label>
+    <input class="form-control" type="text" asp-for="Emial" />
+    <span asp-validation-for="Emial"></span>
+
+    <br />
+    <label asp-for="Address">Address</label>
+    <input class="form-control" type="text" asp-for="Address" />
+    <span asp-validation-for="Address"></span>
+
+    <br />
+    <label asp-for="HireDate">Hire Date</label>
+    <input class="form-control" type="date" asp-for="HireDate" />
+    <span asp-validation-for="HireDate"></span>
+
+    <br />
+    <label asp-for="Notes">Notes</label>
+<textarea class="form-control" type="text" asp-for="Notes"></textarea>
+    <span asp-validation-for="Notes"></span>
+
+    <br />
+    <select asp-items="(SelectList)ViewBag.DepartmentList" asp-for="DepartmentId">
+        <option>Choose the department</option>
+    </select>
+    <br />
+    <button type="submit" class="btn btn-info">Update</button>
+</form>
+
+<Center>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Index">Return</a>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Delete"> Delete</a>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Update">Update</a>
+
+</Center>
+@section Microsoft_validation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

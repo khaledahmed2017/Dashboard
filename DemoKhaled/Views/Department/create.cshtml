@@ -1,0 +1,24 @@
+﻿@model DemoKhaled.BL.Models.deptVm
+
+<form class="form-group" asp-controller="Department" asp-action="create">
+    <h1>create new department</h1>
+    <label asp-for="Name">Name</label>
+    <input class="form-control" type="text" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <br />
+    <label asp-for="code">Code</label>
+
+    <input class="form-control" type="text" asp-for="code" />
+    <span asp-validation-for="code"></span>
+
+    <center>
+        <button type="submit" class="btn btn-info"> Save</button>
+        <button type="reset" class="btn btn-info"> Reset</button>
+    </center>
+
+</form>
+
+@section Microsoft_validation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

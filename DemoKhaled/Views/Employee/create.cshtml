@@ -1,0 +1,142 @@
+﻿@model DemoKhaled.BL.Models.EmployeeVm
+@inject DemoKhaled.BL.interfaces.ICountryRep country
+@{
+    ViewData["Title"] = "detailes";
+}
+    @*this line is indicator to the asp-for attribute which tell it i knew the Name from the data which is passed to me*/*@
+
+
+<h1>@SharedLocalizer["create new Empolyee"]</h1>
+<form asp-controller="Employee" asp-action="create" enctype="multipart/form-data">
+    <label asp-for="Name">@SharedLocalizer["Name"]</label>
+    <input class="form-control" type="text" asp-for="Name" />
+    @*instead of send attribute name="Name" with this input we used asp-for ="Name" to connect the field in the department attribute sent to create function*@
+    <span asp-validation-for="Name"></span>
+
+    <br />
+    <label asp-for="salary">@SharedLocalizer["Salary"]</label>
+    <input class="form-control" type="text" asp-for="salary" />
+    <span asp-validation-for="salary"></span>
+
+    <br />
+    <label asp-for="Emial">@SharedLocalizer["Emial"]</label>
+    <input class="form-control" type="text" asp-for="Emial" />
+    <span asp-validation-for="Emial"></span>
+
+    <br />
+    <label asp-for="Address">@SharedLocalizer["Address"]</label>
+    <input class="form-control" type="text" asp-for="Address" />
+    <span asp-validation-for="Address"></span>
+
+    <br />
+    <label asp-for="HireDate">@SharedLocalizer["Hire Date"]</label>
+    <input class="form-control" type="text" asp-for="HireDate" />
+    <span asp-validation-for="HireDate"></span>
+
+    <br />
+    <label asp-for="Notes">@SharedLocalizer["Notes"]</label>
+<textarea class="form-control" type="text" asp-for="Notes"></textarea>
+    <span asp-validation-for="Notes"></span>
+
+    <br />
+    <select class="form-group" asp-items="(SelectList)ViewBag.DepartmentList" asp-for="DepartmentId">
+        @*asp-for means that this select will connect with DepartmentId*@
+        <option>@SharedLocalizer["Choose the department"]</option>
+    </select><br />
+    <select class="form-group" id="CountryList">
+        <option>@SharedLocalizer["choose Country"]</option>
+        @foreach (var item in country.get())
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select><br />
+    <select class="form-group" id="City">
+        <option>@SharedLocalizer["Choose City"]</option>
+    </select><br />
+    <select class="form-group" asp-for="DistrictId">
+        @*asp-for is only here because  DistrictId is the only field in the Employee object*@
+        <option>@SharedLocalizer["choose Distinct"]</option>
+
+    </select>
+    <br />
+    <label asp-for="CV">Cv</label>
+    <input asp-for="CV" type="file" class="form-control" />
+    <br />
+    <label asp-for="Photo">photo</label>
+    <input asp-for="Photo" type="file" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-info">@SharedLocalizer["Create"]</button>
+</form>
+
+
+<Center>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Index">Return</a>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Delete"> Delete</a>
+    <a class="btn btn-danger" type="submit" asp-controller="Employee" asp-action="Update">Update</a>
+
+</Center>
+
+@*@section selectBootstrab {
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+}*@
+
+@section Microsoft_validation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(function () {
+
+        $("#CountryList").change(function () {
+
+            var CountryId = $("#CountryList option:selected").val();
+
+            $("#City").empty();
+            $("#City").append("<option> City</option>");
+
+            $.ajax({
+                //this Ajax script work with Get as well as Post
+                type: "POST",//it must be Post to be Secure
+                url: "/Employee/GetCityDataByCountryId",
+                data: { ctrId: CountryId },
+                success: function (res) {//return value if it Post we haven't to recieve vlue 
+                    console.log(res);
+                    $.each(res, function (i, item) {
+                        console.log("wdef");
+                        $("#City").append("<option value='" + item.Id + "'>" + item.Name+ "</option>");
+                    });
+                }
+
+            });
+
+
+        });
+
+        $("#City").change(function () {
+            //console.log('kkkkkkkkkk');
+            var CityId = $("#City option:selected").val();
+
+            $("#DistrictId").empty();
+            $("#DistrictId").append("<option>Choose District</option>");
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Employee/GetDistinctDataByCityId",
+                data: { cityId: CityId },
+                success: function (res){
+                    console.log(res);
+                    $.each(res, function (i, e) {
+                        $("#DistrictId").append("<option value='" + e.Id + "'>" + e.Name + "</option>");
+                    });
+                }
+
+            });
+
+
+        });
+
+
+    });
+
+</script>
+}

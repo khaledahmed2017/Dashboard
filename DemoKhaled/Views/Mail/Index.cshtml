@@ -1,0 +1,16 @@
+﻿@model DemoKhaled.BL.Models.MailMV
+@{
+    ViewData["Title"] = "send review";
+}
+
+<h2>send your review</h2>
+<h4>@TempData["message"]</h4>
+
+<form asp-controller="Mail" asp-action="Index">
+    <label>Title</label>
+    <input type="text" class="form-control" asp-for="Title" />
+    <label>Message</label>
+    <input type="text" class="form-control" asp-for="Message" />
+    <input type="submit" class="btn btn-danger" value="Send" />
+</form>
+

@@ -1,0 +1,26 @@
+﻿@model DemoKhaled.BL.Models.deptVm
+    //this line is indicator to the asp-for attribute which tell it i knew the Name from the data which is passed to me 
+    @{
+        ViewData["Title"] = "detailes";
+    }
+
+    <h2>detailes</h2>
+
+    <h1>create new department</h1>
+    <label asp-for="Name">Name</label>
+    <input class="form-control" type="text" asp-for="Name" disabled />
+    <span asp-validation-for="Name"></span>
+    <br />
+    <label asp-for="code">Code</label>
+
+    <input class="form-control" type="text" asp-for="code" disabled />
+    <span asp-validation-for="code"></span>
+<br />
+
+<Center>
+    <a class="btn btn-danger" type="submit"  asp-controller="Department" asp-action="Index" >Return</a>
+    <a  class="btn btn-danger" type="submit"  asp-controller="Department" asp-action="Delete" > Delete</a>
+    <a  class="btn btn-danger" type="submit"  asp-controller="Department" asp-action="Update" >Update</a>
+
+</Center>
+

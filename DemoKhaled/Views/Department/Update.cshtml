@@ -1,0 +1,31 @@
+﻿@model DemoKhaled.BL.Models.deptVm
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+<form asp-controller="Department" asp-action="Update" method="post">
+
+    <label asp-for="Name">Name</label>
+    <input class="form-control" type="text" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <br />
+    <label asp-for="code">Code</label>
+
+    <input class="form-control" type="text" asp-for="code" />
+    <span asp-validation-for="code"></span>
+    <br />
+
+    <button class="btn btn-info" type="submit">Save</button>
+</form>
+
+
+@section selectBootstrab {
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+}
+
+@section Microsoft_validation{
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
